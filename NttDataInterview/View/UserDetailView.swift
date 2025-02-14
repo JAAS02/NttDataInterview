@@ -9,6 +9,7 @@ import SwiftUI
 
 struct UserDetailView: View {
     var userInfo : UserModel
+    @StateObject var userListViewModel = UserDetailViewModel()
     
     var body: some View {
         ZStack{
@@ -63,21 +64,34 @@ struct UserDetailView: View {
                 }
                 ///Estos 2 botones daran un error ya que el simulador no puede realizar llamadas ni cuenta con la aplicacion de mail
                 HStack(spacing:50){
-                    
-                    Link(destination: URL(string: "tel://\(userInfo.phone.replacingOccurrences(of: "-", with: ""))")!){
+                    Button{
+                        userListViewModel.openPhone(phone: userInfo.phone)
+                    } label: {
                         Image(systemName: "phone")
                             .resizable()
                             .frame(width: 40, height: 40)
                             .frame(width: 60,height: 60)
                             .background(RoundedRectangle(cornerRadius: 45).fill(Color.green))
                     }
-                    Link(destination: URL(string: "mailto:\(userInfo.email)")!){
+                    Button{
+                        userListViewModel.openEmail(email: userInfo.email)
+                    } label:{
                         Image(systemName: "envelope")
                             .resizable()
                             .frame(width: 40, height: 30)
                             .frame(width: 60,height: 60)
                             .background(RoundedRectangle(cornerRadius: 45).fill(Color.blue))
                     }
+                    Button {
+                        userListViewModel.openMap(lat: userInfo.address.geo.lat, lng: userInfo.address.geo.lng)
+                    } label: {
+                        Image(systemName: "map")
+                            .resizable()
+                            .frame(width: 40, height: 30)
+                            .frame(width: 60,height: 60)
+                            .background(RoundedRectangle(cornerRadius: 45).fill(Color.gray))
+                    }
+
                     
                 }
                 Spacer()

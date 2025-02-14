@@ -18,6 +18,7 @@ struct UserModel : Codable, Identifiable{
     var phone : String
     var website : String
     var company : CompanyModel
+   
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -28,6 +29,7 @@ struct UserModel : Codable, Identifiable{
         case phone
         case website
         case company
+        
     }
     ///Este init se realiza ya que el campo phone, contiene una cadena extra despues del numero
     init(from decoder: any Decoder) throws {
@@ -40,25 +42,31 @@ struct UserModel : Codable, Identifiable{
         self.phone = try container.decode(String.self, forKey: .phone).components(separatedBy: " ")[0]
         self.website = try container.decode(String.self, forKey: .website)
         self.company = try container.decode(CompanyModel.self, forKey: .company)
+        
     }
 }
+
 
 struct CompanyModel : Codable{
     var name : String
     var catchPhrase : String
     var bs : String
 }
+
+
 struct AddressModel : Codable{
     var street : String
     var city : String
     var zipCode : String
     var suite : String
+    var geo : GeoLocationModel
     
     enum CodingKeys: String, CodingKey {
         case street = "street"
         case city
         case zipCode = "zipcode"
         case suite
+        case geo
     }
     ///Este init es necesario ya que el campo zipCode viene en el json todo en minusculas
     init(from decoder: any Decoder) throws {
@@ -67,5 +75,12 @@ struct AddressModel : Codable{
         self.city = try container.decode(String.self, forKey: .city)
         self.zipCode = try container.decode(String.self, forKey: .zipCode)
         self.suite = try container.decode(String.self, forKey: .suite)
+        self.geo = try container.decode(GeoLocationModel.self, forKey: .geo)
     }
+}
+
+
+struct GeoLocationModel : Codable{
+    var lat : String
+    var lng : String
 }
