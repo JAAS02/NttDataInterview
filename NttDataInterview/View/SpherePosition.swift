@@ -19,6 +19,7 @@ struct BackgroundSpheresView: View {
     var positionPurple: SpherePosition
     let width = UIScreen.main.bounds.width
 
+    ///Segun las posiciones indicadas en la inicializacion seran los puntos que se obtengan para dibujar las esferas
     func getSpherePosition(position:SpherePosition)-> CGPoint{
         switch(position){
             case SpherePosition.right:

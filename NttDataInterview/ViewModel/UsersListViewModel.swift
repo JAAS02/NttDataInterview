@@ -20,17 +20,12 @@ class UserListViewModel : ObservableObject {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         URLSession.shared.dataTask(with: request){ data, response, error in
+            ///En este ejemplo no se hace nada en caso de que ocurra un error, solo se mostrara el error en consola
             if let error = error {
-                print("yep")
                print(error)
                return
            }
-//            let statusCode = response as? HTTPURLResponse
-//            print("Code: \(statusCode?.statusCode ?? 0)")
-//            if let jsonString = String(data: data ?? Data(), encoding: .utf8) {
-//                print("JSON RESPONSE: \(jsonString)")
-//            }
-           
+            ///Si la respuesta que se obtiene de la API esta entre el rango 200 y 299 se considera como correcta y el flujo continua, sino se considerara como un error
            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
                print("Error \(String(describing: response))")
                return
@@ -39,8 +34,10 @@ class UserListViewModel : ObservableObject {
            guard let data = data else { return }
            do {
                let decoder = JSONDecoder()
+               ///Al decoder se le asigna la estrategia para realizar la decodificacion en caso de que la API regrese algun valor con formato snake_case
                decoder.keyDecodingStrategy = .convertFromSnakeCase
-               var decodedUsers = try decoder.decode([UserModel].self, from: data)
+               let decodedUsers = try decoder.decode([UserModel].self, from: data)
+               ///Se le informa al hilo principal sobre los cambios para que realice la actualizacion de la variable
                DispatchQueue.main.async {
                    self.userList = decodedUsers
                }

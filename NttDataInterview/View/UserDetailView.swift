@@ -12,6 +12,7 @@ struct UserDetailView: View {
     
     var body: some View {
         ZStack{
+            ///El ZStack es necesario para que las esferas en el background se queden en el fondo de la vista
             BackgroundSpheresView(positionBlue: SpherePosition.left, positionOrange: SpherePosition.none, positionPurple: SpherePosition.right)
             VStack(spacing: 40){
                 Text(userInfo.name)
@@ -41,7 +42,7 @@ struct UserDetailView: View {
                         }
                         Link(destination: URL(string: "https://\(userInfo.website)")!) {
                             Text(userInfo.website)
-                                .foregroundStyle(.white)
+                                .foregroundStyle(.blue)
                                 .font(.headline)
                                 .underline()
                         }
@@ -60,7 +61,7 @@ struct UserDetailView: View {
                     InfoRow(title1: "Suit", title2: "Zip Code", value1: userInfo.address.suite, value2: userInfo.address.zipCode)
                 }
                 ///Estos 2 botones daran un error ya que el simulador no puede realizar llamadas ni cuenta con la aplicacion de mail
-                HStack(spacing:20){
+                HStack(spacing:50){
                     
                     Link(destination: URL(string: "tel://\(userInfo.phone.replacingOccurrences(of: "-", with: ""))")!){
                         Image(systemName: "phone")
@@ -110,7 +111,7 @@ struct InfoRow: View {
                 .frame(height: 30)
                 .bold()
                 .overlay(.white.opacity(0.6))
-            Spacer()
+            
             VStack(alignment: .leading,spacing: 8){
                 Text(title2)
                     .foregroundStyle(.white)
@@ -120,6 +121,7 @@ struct InfoRow: View {
                     .bold()
                     .font(.caption)
             }
+            Spacer()
             
         }.frame(maxWidth: .infinity)
     }

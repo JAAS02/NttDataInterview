@@ -60,7 +60,7 @@ struct AddressModel : Codable{
         case zipCode = "zipcode"
         case suite
     }
-    
+    ///Este init es necesario ya que el campo zipCode viene en el json todo en minusculas
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.street = try container.decode(String.self, forKey: .street)
