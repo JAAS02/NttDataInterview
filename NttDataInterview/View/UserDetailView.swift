@@ -71,7 +71,7 @@ struct UserDetailView: View {
                             .resizable()
                             .frame(width: 40, height: 40)
                             .frame(width: 60,height: 60)
-                            .background(RoundedRectangle(cornerRadius: 45).fill(Color.green))
+                            .background(RoundedRectangle(cornerRadius: 45).fill(Color.green.gradient))
                     }
                     Button{
                         userListViewModel.openEmail(email: userInfo.email)
@@ -80,7 +80,7 @@ struct UserDetailView: View {
                             .resizable()
                             .frame(width: 40, height: 30)
                             .frame(width: 60,height: 60)
-                            .background(RoundedRectangle(cornerRadius: 45).fill(Color.blue))
+                            .background(RoundedRectangle(cornerRadius: 45).fill(Color.blue.gradient))
                     }
                     Button {
                         userListViewModel.openMap(lat: userInfo.address.geo.lat, lng: userInfo.address.geo.lng)
@@ -89,7 +89,7 @@ struct UserDetailView: View {
                             .resizable()
                             .frame(width: 40, height: 30)
                             .frame(width: 60,height: 60)
-                            .background(RoundedRectangle(cornerRadius: 45).fill(Color.gray))
+                            .background(RoundedRectangle(cornerRadius: 45).fill(Color.gray.gradient))
                     }
 
                     
