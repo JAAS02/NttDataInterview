@@ -17,7 +17,7 @@ struct UserCardView: View {
         HStack(spacing: 8){
             Image(systemName: "person.crop.circle.fill")
                 .resizable()
-                .frame(width: 18, height: 18)
+                .frame(width: 24, height: 24)
                 .foregroundStyle(.gray)
             
             VStack(alignment:.leading, spacing: 8){

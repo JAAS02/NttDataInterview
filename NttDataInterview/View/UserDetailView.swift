@@ -17,6 +17,7 @@ struct UserDetailView: View {
             VStack(spacing: 40){
                 Text(userInfo.name)
                     .foregroundStyle(.white)
+                    .bold()
                     .font(.title)
                 VStack(spacing: 24){
                     Image(systemName: "person.crop.circle.fill")
